@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ricky Ruckus Design Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --color-bg: #FAFAF8;
+    --color-surface: #FFFFFF;
+    --color-text: #1A1A1A;
+    --color-muted: #6B6B6B;
+    --color-accent: #2C2C2C;
+    --color-border: #E8E8E4;
+    --color-highlight: #D4A853;
+    --color-error: #C0392B;
+    --radius: 2px;
+    --transition: 0.2s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .logo span { color: var(--color-highlight); }
+
+  nav a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    text-decoration: none;
+    margin-left: 32px;
+    transition: color var(--transition);
+  }
+  nav a:hover { color: var(--color-text); }
+
+  .cart-btn {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background var(--transition);
+    margin-left: 32px;
+  }
+  .cart-btn:hover { background: #000; }
+  .cart-count {
+    background: var(--color-highlight);
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--color-accent);
+    color: #fff;
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--color-highlight);
+    color: #fff;
+    padding: 14px 36px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: opacity var(--transition);
+  }
+  .hero-cta:hover { opacity: 0.88; }
+
+  /* SHOP SECTION */
+  .shop-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .section-count {
+    font-size: 13px;
+    color: var(--color-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+  }
+
+  .product-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+    cursor: pointer;
+  }
+  .product-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    background: #f0f0ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-muted);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-body {
+    padding: 18px 20px 20px;
+  }
+
+  .product-category {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 6px;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .add-to-cart {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: background var(--transition);
+  }
+  .add-to-cart:hover { background: #000; }
+  .add-to-cart.added {
+    background: #27ae60;
+  }
+
+  /* CART SIDEBAR */
+  .cart-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+  }
+  .cart-overlay.open { display: block; }
+
+  .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -480px;
+    width: 100%;
+    max-width: 460px;
+    height: 100vh;
+    background: var(--color-surface);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+  }
+  .cart-sidebar.open { right: 0; }
+
+  .cart-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-muted);
+    line-height: 1;
+    padding: 4px;
+  }
+  .close-btn:hover { color: var(--color-text); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: flex-start;
+  }
+
+  .cart-item-img {
+    width: 72px;
+    height: 90px;
+    object-fit: cover;
+    background: #f0f0ec;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--color-muted);
+  }
+
+  .cart-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .cart-item-info { flex: 1; }
+
+  .cart-item-name {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-price {
+    font-size: 13px;
+    color: var(--color-muted);
+    margin-bottom: 10px;
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-btn {
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--color-border);
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    transition: background var(--transition);
+  }
+  .qty-btn:hover { background: var(--color-bg); }
+
+  .qty-num { font-size: 14px; font-weight: 500; min-width: 20px; text-align: center; }
+
+  .remove-item {
+    background: none;
+    border: none;
+    color: var(--color-muted);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    line-height: 1;
+    transition: color var(--transition);
+  }
+  .remove-item:hover { color: var(--color-error); }
+
+  .cart-footer {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cart-totals { margin-bottom: 16px; }
+
+  .cart-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--color-muted);
+  }
+
+  .cart-row.total {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: background var(--transition);
+  }
+  .checkout-btn:hover { background: #000; }
+
+  /* CHECKOUT MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--color-surface);
+    width: 100%;
+    max-width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  }
+
+  .modal-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .modal-body { padding: 28px 32px; }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 6px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: border-color var(--transition);
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--color-accent); }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .order-summary-box {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .summary-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 12px;
+  }
+
+  .venmo-box {
+    background: #008CFF;
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .venmo-logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .venmo-instructions {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin-bottom: 14px;
+  }
+
+  .venmo-link {
+    display: inline-block;
+    background: #fff;
+    color: #008CFF;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: opacity var(--transition);
+  }
+  .venmo-link:hover { opacity: 0.9; }
+
+  .place-order-btn {
+    width: 100%;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+    margin-top: 16px;
+    transition: background var(--transition);
+  }
+  .place-order-btn:hover { background: #000; }
+
+  /* CONFIRMATION */
+  .confirmation {
+    text-align: center;
+    padding: 40px 32px 32px;
+  }
+
+  .confirmation-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .confirmation h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .confirmation p {
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0 auto 24px;
+  }
+
+  .continue-btn {
+    background: var(--color-highlight);
+    color: #fff;
+    border: none;
+    padding: 13px 32px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--color-border);
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 13px;
+  }
+
+  footer strong {
+    font-family: var(--font-display);
+    color: var(--color-text);
+    font-size: 15px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1A1A1A;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 500;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 0 16px; }
+    .logo { font-size: 16px; }
+    nav { display: none; }
+    .modal-body { padding: 20px; }
+    .modal-header { padding: 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  .add-to-cart.added { background: #27ae60; }
+  .add-to-cart:disabled { background: #aaa; cursor: not-allowed; }
+
+  /* SIZE BUTTONS */
+  .size-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 8px; }
+  .size-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .size-btn {
+    min-width: 40px; height: 34px; padding: 0 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-body); font-size: 12px; font-weight: 600;
+    cursor: pointer; border-radius: var(--radius);
+    transition: all var(--transition);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .size-btn:hover:not(.out-of-stock):not(.selected) { border-color: var(--color-accent); background: var(--color-bg); }
+  .size-btn.selected { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+  .size-btn.out-of-stock { color: #bbb; border-color: #e0e0e0; cursor: not-allowed; background: #f8f8f8; text-decoration: line-through; }
+  .size-btn.out-of-stock::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom right, transparent calc(50% - 0.5px), #ccc calc(50% - 0.5px), #ccc calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    border-radius: var(--radius);
+  }
+  /* Size-in-cart highlight */
+  .cart-item-size { font-size: 12px; color: var(--color-highlight); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 4px; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Ricky Ruckus <span>Design Co</span></a>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="cart-btn" onclick="openCart()">
+      ☐ Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow" id="heroEyebrow">Original Designs · Handcrafted Quality</div>
+  <h1 id="heroTitle">Wear Something<br>Worth Remembering</h1>
+  <p id="heroSubtitle">Clothing and apparel designed with intention. Each piece is crafted to stand out — not blend in.</p>
+  <a href="#shop" class="hero-cta">Shop the Collection</a>
+</section>
+
+<!-- SHOP -->
+<section class="shop-section" id="shop">
+  <div class="section-header">
+    <h2 class="section-title">The Collection</h2>
+    <span class="section-count" id="productCount">0 pieces</span>
+  </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Products injected by JS -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: var(--color-surface); border-top: 1px solid var(--color-border);">
+  <div style="max-width: 680px; margin: 0 auto; padding: 64px 24px; text-align: center;">
+    <p style="font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--color-highlight);margin-bottom:14px;font-weight:600;">About</p>
+    <h2 id="aboutTitle" style="font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:500;margin-bottom:20px;">The Story Behind the Brand</h2>
+    <p id="aboutText" style="color:var(--color-muted);line-height:1.8;font-size:15px;">Ricky Ruckus Design Co was built on the belief that clothing should say something. Each design is created with care, printed with quality, and shipped with pride. Welcome to the collection.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>The Ricky Ruckus Design Co</strong>
+  © 2025 All rights reserved &nbsp;·&nbsp; Questions? <a href="mailto:" style="color:var(--color-highlight);text-decoration:none;" id="footerEmail">contact us</a>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <span class="cart-title">Your Cart</span>
+    <button class="close-btn" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your cart is empty.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Checkout</span>
+      <button class="close-btn" onclick="closeCheckout()">×</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <div class="order-summary-box">
+        <div class="summary-label">Order Summary</div>
+        <div id="modalOrderSummary"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Full Name *</label>
+        <input class="form-input" type="text" id="custName" placeholder="Jane Smith" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address *</label>
+        <input class="form-input" type="email" id="custEmail" placeholder="jane@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Street Address *</label>
+        <input class="form-input" type="text" id="custStreet" placeholder="123 Main Street" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City *</label>
+          <input class="form-input" type="text" id="custCity" placeholder="Columbus" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State *</label>
+          <input class="form-input" type="text" id="custState" placeholder="OH" maxlength="2" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">ZIP Code *</label>
+          <input class="form-input" type="text" id="custZip" placeholder="43215" maxlength="5" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone (optional)</label>
+          <input class="form-input" type="tel" id="custPhone" placeholder="(614) 555-0100">
+        </div>
+      </div>
+
+      <div id="checkoutTotals" style="margin-bottom:4px;"></div>
+
+      <div class="venmo-box">
+        <div class="venmo-logo">venmo</div>
+        <div class="venmo-instructions">
+          After clicking "Place Order", you'll pay via Venmo to <strong>@Ricky_Ruckus_Design_Co</strong>.<br>
+          Include your order number in the payment note.
+        </div>
+        <a href="https://venmo.com/Ricky_Ruckus_Design_Co" target="_blank" class="venmo-link">Open Venmo</a>
+      </div>
+
+      <button class="place-order-btn" onclick="placeOrder()">Place Order & Pay via Venmo</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <div class="confirmation" id="confirmationBody">
+      <div class="confirmation-icon">✓</div>
+      <h2>Order Received!</h2>
+      <p id="confirmText">Thank you! Your order has been recorded. Please complete your payment on Venmo to <strong>@Ricky_Ruckus_Design_Co</strong> and include your order number in the note.</p>
+      <div style="background:var(--color-bg);border:1px solid var(--color-border);border-radius:4px;padding:14px;margin-bottom:20px;font-size:14px;">
+        <div style="color:var(--color-muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Your Order #</div>
+        <div id="confirmOrderNum" style="font-size:22px;font-weight:700;font-family:var(--font-display);"></div>
+      </div>
+      <button class="continue-btn" onclick="closeConfirm()">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── SHARED STORAGE ──────────────────────────────────────────────────────────
+const STORE_KEY = 'rr_store_data';
+const ORDERS_KEY = 'rr_orders';
+
+function getStoreData() {
+  const raw = localStorage.getItem(STORE_KEY);
+  if (raw) return JSON.parse(raw);
+  // Default store data
+  return {
+    heroTitle: 'Wear Something<br>Worth Remembering',
+    heroSubtitle: 'Clothing and apparel designed with intention. Each piece is crafted to stand out — not blend in.',
+    heroEyebrow: 'Original Designs · Handcrafted Quality',
+    aboutTitle: 'The Story Behind the Brand',
+    aboutText: 'Ricky Ruckus Design Co was built on the belief that clothing should say something. Each design is created with care, printed with quality, and shipped with pride. Welcome to the collection.',
+    fontDisplay: 'Playfair Display',
+    fontBody: 'DM Sans',
+    colorAccent: '#2C2C2C',
+    colorHighlight: '#D4A853',
+    colorBg: '#FAFAF8',
+    taxRate: 0.0575,
+    shippingFlat: 5.99,
+    freeShippingOver: 75,
+    products: [
+      { id:1, name:'Classic Logo Tee',   category:'T-Shirts',   price:29.99, description:'Premium cotton, relaxed fit. Available in all sizes.', image:'',
+        sizes:[{label:'XS',oos:false},{label:'S',oos:false},{label:'M',oos:false},{label:'L',oos:false},{label:'XL',oos:false},{label:'2XL',oos:false}]},
+      { id:2, name:'Design Co Hoodie',   category:'Hoodies',    price:54.99, description:'Midweight fleece, kangaroo pocket. Perfect for any season.', image:'',
+        sizes:[{label:'S',oos:false},{label:'M',oos:false},{label:'L',oos:false},{label:'XL',oos:false},{label:'2XL',oos:false}]},
+      { id:3, name:'Ruckus Cap',         category:'Accessories',price:24.99, description:'Structured 5-panel cap with embroidered logo.', image:'',
+        sizes:[{label:'One Size',oos:false}]},
+      { id:4, name:'Signature Crewneck', category:'Sweatshirts',price:44.99, description:'Heavyweight french terry. Oversized, vintage feel.', image:'',
+        sizes:[{label:'S',oos:false},{label:'M',oos:false},{label:'L',oos:false},{label:'XL',oos:false},{label:'2XL',oos:false}]}
+    ]
+  };
+}
+
+function saveOrders(orders) {
+  localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+}
+
+function getOrders() {
+  const raw = localStorage.getItem(ORDERS_KEY);
+  return raw ? JSON.parse(raw) : [];
+}
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let store = getStoreData();
+let cart = [];          // items: {cartKey, id, name, size, price, image, qty}
+const selectedSizes = {}; // {productId: 'M'}
+
+// ── APPLY STORE SETTINGS ─────────────────────────────────────────────────────
+function applyStoreSettings() {
+  store = getStoreData();
+  document.documentElement.style.setProperty('--color-accent', store.colorAccent);
+  document.documentElement.style.setProperty('--color-highlight', store.colorHighlight);
+  document.documentElement.style.setProperty('--color-bg', store.colorBg);
+  document.getElementById('heroTitle').innerHTML = store.heroTitle;
+  document.getElementById('heroSubtitle').textContent = store.heroSubtitle;
+  document.getElementById('heroEyebrow').textContent = store.heroEyebrow;
+  document.getElementById('aboutTitle').textContent = store.aboutTitle;
+  document.getElementById('aboutText').textContent = store.aboutText;
+  renderProducts();
+}
+
+// ── PRODUCTS ─────────────────────────────────────────────────────────────────
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const products = store.products;
+  document.getElementById('productCount').textContent = products.length + ' piece' + (products.length !== 1 ? 's' : '');
+
+  grid.innerHTML = products.map(p => {
+    const hasSizes = p.sizes && p.sizes.length > 0;
+    const allOos   = hasSizes && p.sizes.every(s => s.oos);
+
+    const sizesHtml = hasSizes ? `
+      <div class="size-label">Select Size</div>
+      <div class="size-row" id="sizeRow_${p.id}">
+        ${p.sizes.map(s => `
+          <button class="size-btn${s.oos ? ' out-of-stock' : ''}"
+            data-product="${p.id}" data-size="${s.label}"
+            onclick="${s.oos ? '' : `selectSize(${p.id}, '${s.label}', this)`}"
+            ${s.oos ? 'disabled title="Out of stock"' : ''}
+          >${s.label}</button>`).join('')}
+      </div>` : '';
+
+    return `
+      <div class="product-card">
+        <div class="product-img">
+          ${p.image ? `<img src="${p.image}" alt="${p.name}">` : '<span style="text-align:center;padding:20px;">No image yet</span>'}
+        </div>
+        <div class="product-body">
+          <div class="product-category">${p.category}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.description}</div>
+          ${sizesHtml}
+          <div class="product-footer">
+            <span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>
+            <button class="add-to-cart" id="addBtn_${p.id}" onclick="addToCart(${p.id}, this)" ${allOos ? 'disabled' : ''}>
+              ${allOos ? 'Sold Out' : 'Add to Cart'}
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Auto-select single-option sizes
+  products.forEach(p => {
+    if (p.sizes && p.sizes.length === 1 && !p.sizes[0].oos) {
+      const btn = document.querySelector(`#sizeRow_${p.id} .size-btn`);
+      if (btn) { btn.classList.add('selected'); selectedSizes[p.id] = p.sizes[0].label; }
+    }
+  });
+}
+
+function selectSize(productId, sizeLabel, btn) {
+  document.querySelectorAll(`#sizeRow_${productId} .size-btn`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSizes[productId] = sizeLabel;
+}
+
+// ── CART ──────────────────────────────────────────────────────────────────────
+function addToCart(productId, btn) {
+  const product = store.products.find(p => p.id === productId);
+  if (!product) return;
+  const hasSizes = product.sizes && product.sizes.length > 0;
+  let chosenSize = selectedSizes[productId];
+
+  if (hasSizes && !chosenSize) {
+    showToast('Please select a size first!');
+    const row = document.getElementById('sizeRow_' + productId);
+    if (row) {
+      row.style.outline = '2px solid var(--color-highlight)';
+      row.style.borderRadius = '4px';
+      setTimeout(() => { row.style.outline = ''; row.style.borderRadius = ''; }, 1400);
+    }
+    return;
+  }
+
+  const cartKey = productId + '|' + (chosenSize || 'NoSize');
+  const existing = cart.find(i => i.cartKey === cartKey);
+  if (existing) { existing.qty++; }
+  else { cart.push({ cartKey, id: product.id, name: product.name, size: chosenSize || null, price: product.price, image: product.image, qty: 1 }); }
+
+  updateCartCount();
+  showToast(product.name + (chosenSize ? ' — ' + chosenSize : '') + ' added to cart');
+  btn.textContent = '✓ Added';
+  btn.classList.add('added');
+  setTimeout(() => { btn.textContent = 'Add to Cart'; btn.classList.remove('added'); }, 1500);
+}
+
+function removeFromCart(cartKey) {
+  cart = cart.filter(i => i.cartKey !== cartKey);
+  renderCart();
+  updateCartCount();
+}
+
+function changeQty(cartKey, delta) {
+  const item = cart.find(i => i.cartKey === cartKey);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(cartKey);
+  else { renderCart(); updateCartCount(); }
+}
+
+function updateCartCount() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = total;
+}
+
+function getSubtotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
+
+function getShipping() {
+  const sub = getSubtotal();
+  if (sub === 0) return 0;
+  return sub >= store.freeShippingOver ? 0 : store.shippingFlat;
+}
+
+function getTax() {
+  return getSubtotal() * store.taxRate;
+}
+
+function getTotal() {
+  return getSubtotal() + getShipping() + getTax();
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const totals = document.getElementById('cartTotals');
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
+    totals.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img">
+        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '📦'}
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        ${item.size ? `<div class="cart-item-size">Size: ${item.size}</div>` : ''}
+        <div class="cart-item-price">$${parseFloat(item.price).toFixed(2)} each</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty('${item.cartKey}', -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.cartKey}', 1)">+</button>
+        </div>
+      </div>
+      <button class="remove-item" onclick="removeFromCart('${item.cartKey}')">×</button>
+    </div>
+  `).join('');
+
+  const sub = getSubtotal();
+  const ship = getShipping();
+  const tax = getTax();
+  const total = getTotal();
+
+  totals.innerHTML = `
+    <div class="cart-row"><span>Subtotal</span><span>$${sub.toFixed(2)}</span></div>
+    <div class="cart-row"><span>Shipping</span><span>${ship === 0 ? 'FREE' : '$' + ship.toFixed(2)}</span></div>
+    <div class="cart-row"><span>Tax (OH ${(store.taxRate*100).toFixed(2)}%)</span><span>$${tax.toFixed(2)}</span></div>
+    <div class="cart-row total"><span>Total</span><span>$${total.toFixed(2)}</span></div>
+  `;
+}
+
+function openCart() {
+  renderCart();
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartSidebar').classList.add('open');
+}
+
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartSidebar').classList.remove('open');
+}
+
+// ── CHECKOUT ──────────────────────────────────────────────────────────────────
+function openCheckout() {
+  if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+  closeCart();
+
+  const summary = document.getElementById('modalOrderSummary');
+  summary.innerHTML = cart.map(i => `
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+      <span>${i.name}${i.size ? ' <span style=\'color:var(--color-highlight);font-weight:600;\'>('+i.size+')</span>' : ''} × ${i.qty}</span>
+      <span>$${(i.price * i.qty).toFixed(2)}</span>
+    </div>
+  `).join('');
+
+  const sub = getSubtotal();
+  const ship = getShipping();
+  const tax = getTax();
+  const total = getTotal();
+
+  document.getElementById('checkoutTotals').innerHTML = `
+    <div style="background:var(--color-bg);border:1px solid var(--color-border);border-radius:2px;padding:14px;margin-bottom:4px;">
+      <div class="cart-row"><span>Subtotal</span><span>$${sub.toFixed(2)}</span></div>
+      <div class="cart-row"><span>Shipping</span><span>${ship === 0 ? 'FREE' : '$' + ship.toFixed(2)}</span></div>
+      <div class="cart-row"><span>Tax (OH ${(store.taxRate*100).toFixed(2)}%)</span><span>$${tax.toFixed(2)}</span></div>
+      <div class="cart-row total"><span>Total Due</span><span>$${total.toFixed(2)}</span></div>
+    </div>
+  `;
+
+  document.getElementById('checkoutModal').classList.add('open');
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+}
+
+function placeOrder() {
+  const name = document.getElementById('custName').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const street = document.getElementById('custStreet').value.trim();
+  const city = document.getElementById('custCity').value.trim();
+  const state = document.getElementById('custState').value.trim();
+  const zip = document.getElementById('custZip').value.trim();
+
+  if (!name || !email || !street || !city || !state || !zip) {
+    showToast('Please fill in all required fields.');
+    return;
+  }
+  if (!email.includes('@')) { showToast('Please enter a valid email.'); return; }
+
+  const orderNum = 'RR-' + Date.now().toString().slice(-6);
+  const order = {
+    id: orderNum,
+    date: new Date().toISOString(),
+    customer: { name, email, street, city, state, zip, phone: document.getElementById('custPhone').value },
+    items: cart.map(i => ({ id: i.id, name: i.name, size: i.size || null, qty: i.qty, price: i.price })),
+    subtotal: getSubtotal(),
+    shipping: getShipping(),
+    tax: getTax(),
+    total: getTotal(),
+    status: 'Pending Payment'
+  };
+
+  const orders = getOrders();
+  orders.push(order);
+  saveOrders(orders);
+
+  closeCheckout();
+  cart = [];
+  Object.keys(selectedSizes).forEach(k => delete selectedSizes[k]);
+  updateCartCount();
+
+  document.getElementById('confirmOrderNum').textContent = orderNum;
+  document.getElementById('confirmModal').classList.add('open');
+}
+
+function closeConfirm() {
+  document.getElementById('confirmModal').classList.remove('open');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+applyStoreSettings();
+
+// Listen for admin changes (if open in another tab)
+window.addEventListener('storage', (e) => {
+  if (e.key === STORE_KEY) applyStoreSettings();
+});
+</script>
+</body>
+</html>
